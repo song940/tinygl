@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyGL</title>
+</head>
+<body>
+    <canvas id="canvas" ></canvas>
+</body>
+<script type="module" >
+    import { createContext, Stage, Sprite, Camera } from '../tinygl.js';
+    
+
+    const context = createContext('#canvas');
+    const stage = new Stage({ context, width: 400, height: 500 });
+
+    const sprite = new Sprite();
+    stage.add(sprite);
+
+    const camera = new Camera();
+    stage.add(camera);
+
+    (function loop() {
+
+        stage.render();
+
+        camera.lookAt(sprite.position);
+        camera.zoomTo(500);
+
+        requestAnimationFrame(loop);
+    })();
+
+</script>
+</html>
